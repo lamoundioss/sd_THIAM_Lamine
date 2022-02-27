@@ -14,48 +14,56 @@ from DictionnaireToJson import DictionnaireToJson
 
 fichier = input("Veuillez entrer le fichier que vous souhaitez convertir : ")
 
-liste = ["xml", "csv", "json", "yml"]
+listes = ["xml", "csv", "json", "yml"]
 
 rendu = NatureFichier(fichier)
 
 if rendu == 1:
-    liste = liste.remove('xml')
-    with open('fichier.xml', 'r') as file:
+    liste = listes.remove('xml')
+    with open(fichier, 'r') as file:
         file = xmltodict.parse(file.read())
-        files = json.load(json.dumps(file))
+        fichier = json.loads(json.dumps(file))
 else:
     if rendu == 2:
-        liste = liste.remove('csv')
-        Donnee ={}
-        with open('Donnee.csv', 'r') as file:
-            line = file.read()
-            section = line.split('\n')
-            for i in section:
-                el = i.split(',')
-                Donnee[ el[0] ] = int ( el[1] )
+        liste = listes.remove('csv')
+        dict_from_csv = []
+        with open(fichier, 'r') as file:
+            line = csv.reader(file, delimiter = ";")
+            lecture = list(line)
+
+            for i in range(len(lecture)):
+                if i != 0:
+                    dicte = dict()
+                    for j in range(len(lecture[0])):
+                        dicte[lecture[0][j]] = lecture[i][j]
+                    dict_from_csv.append(dicte)
+        fichier = dict_from_csv
+            
     else:
         if rendu == 3:
-            liste = liste.remove('yaml','yml')
-            with open('yaml_file.yaml') as yaml_file:
+            liste = listes.remove('yml')
+            with open(fichier) as yaml_file:
                 yaml_to_dict = yaml.safe_load(yaml_file)
         else:
-            liste = liste.remove('json')
-            with open('json_file.json', 'r') as json_file:
-                json_to_dict = json.load(json_file)
-
-print(f"1. Conversion vers {liste[0]}")
-print(f"2. Conversion vers {liste[1]}")
-print(f"3. Conversion vers {liste[2]}")
+            if rendu == 4:
+                liste = listes.remove('json')
+                with open(fichier, 'r') as json_file:
+                    json_to_dict = json.load(json_file)
+print(listes)
+print(listes[0])
+print(f"{listes[0]}. Conversion vers {listes[0]}")
+print(f"{listes[1]}. Conversion vers {listes[1]}")
+print(f"{listes[2]}. Conversion vers {listes[2]}")
 print("Tapez 0 pour quitter.")
 choix = input("Faites votre choix : ")
-if choix == 1:
+if choix == 'xml':
     DictionnaireToXml(fichier)
 else:
-    if choix == 2:
+    if choix == 'csv':
         DictionnaireToCsv(fichier)
     else:
-        if choix == 3:
+        if choix == 'yml':
             dictionnaireToYml(fichier)
         else:
-            if choix == '4':
+            if choix == 'json':
                 DictionnaireToJson(fichier)

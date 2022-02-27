@@ -1,6 +1,5 @@
 
 def NatureFichier(fichier):
-    fichier = input("Veuillez donner un fichier.")
     fichier = fichier.split(".")
 
     extension = fichier[-1]
@@ -13,7 +12,7 @@ def NatureFichier(fichier):
             print("C'est un fichier csv")
             Test = 2
         else:
-            if extension == "yml":
+            if extension == "yaml":
                 print("C'est un fichier yml")
                 Test = 3
             else:

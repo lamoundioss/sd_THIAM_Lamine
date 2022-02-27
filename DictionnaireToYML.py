@@ -1,7 +1,7 @@
 
 
 import yaml
-x = {
+m = {
         "nom": "Durand",
         "famille":{
             "ecole": "mnt",
@@ -15,7 +15,7 @@ def dictionnaireToYml(x):
     with open('fichier_yaml1.yaml', 'a') as f:
         
         fichier_csv = yaml.dump(x, f)
-        return fichier_csv
+    return fichier_csv
 
-print(dictionnaireToYml(x))
+#print(dictionnaireToYml(m))
 

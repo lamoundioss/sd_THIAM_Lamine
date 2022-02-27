@@ -8,10 +8,9 @@ diction = {"nom": "Durand", "prenom": "Christophe", "date de naissance": "29/02/
 #    json_to_dict = json.load(json_file)
 
 def DictionnaireToJson(fiche):
-    with open("dictionnaireto.json", "a") as file:
+    with open("dictionnaire.json", "a") as file:
         fichier = json.dump(fiche, file)
 
-    return fiche
 
 
 #print(diction)
